@@ -10,11 +10,14 @@
     "codegen": "graphql-codegen --config codegen.ts  --watch"
   },
   "dependencies": {
+    "@visx/scale": "^3.5.0",
+    "@visx/shape": "^3.5.0",
     "classnames": "^2.3.2",
     "d3-axis": "^3.0.0",
     "d3-brush": "^3.0.0",
     "d3-sankey": "^0.12.3",
     "d3-scale": "^4.0.2",
+    "d3-scale-chromatic": "^3.0.0",
     "d3-selection": "^3.0.0",
     "graphql": "^16.8.1",
     "lodash.debounce": "^4.0.8",
@@ -36,6 +39,7 @@
     "@types/d3-brush": "^3.0.6",
     "@types/d3-sankey": "^0.12.4",
     "@types/d3-scale": "^4.0.8",
+    "@types/d3-scale-chromatic": "^3.0.3",
     "@types/d3-selection": "^3.0.10",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20",

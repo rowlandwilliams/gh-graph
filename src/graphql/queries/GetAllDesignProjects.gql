@@ -1,5 +1,0 @@
-query AllDesignProjects {
-  allDesignProject(sort: { name: ASC }) {
-    ...AllDesignProjectFields
-  }
-}

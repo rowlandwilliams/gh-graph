@@ -1,5 +1,0 @@
-query AllProjects {
-  allProject(sort: { complete: ASC, endDate: DESC }) {
-    ...AllProjectFields
-  }
-}

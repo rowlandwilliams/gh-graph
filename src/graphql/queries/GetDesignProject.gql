@@ -1,5 +1,0 @@
-query DesignProject($designProjectId: ID!) {
-  DesignProject(id: $designProjectId) {
-    ...DesignProjectFields
-  }
-}

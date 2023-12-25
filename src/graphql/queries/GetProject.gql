@@ -1,5 +1,0 @@
-query Project($projectName: String!) {
-  allProject(where: { name: { eq: $projectName } }) {
-    ...ProjectFields
-  }
-}
