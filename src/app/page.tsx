@@ -423,6 +423,7 @@ export default function Home() {
                 endAngle={datesScale(d.date) || 0 + datesScale.bandwidth()}
                 padAngle={0.1}
                 stroke={String(colorScale(d.count)) || undefined}
+                className="stroke-[1.5px]"
               />
             );
 
