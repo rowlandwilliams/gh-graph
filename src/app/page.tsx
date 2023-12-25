@@ -398,8 +398,25 @@ export default function Home() {
     0,
     Math.max(...counts),
   ]);
+
+  const generateIncrements = (
+    innerRadius: number,
+    outerRadius: number
+  ): number[] => {
+    const stepSize = (outerRadius - innerRadius) * 0.1;
+    const numberOfIncrements =
+      Math.ceil((outerRadius - innerRadius) / stepSize) + 1;
+
+    return Array.from(
+      { length: numberOfIncrements },
+      (_, index) => innerRadius + index * stepSize
+    );
+  };
+
+  const increments = generateIncrements(innerRadius, outerRadius);
+
   return (
-    <main className="p-4 grow h-screen gap-4 flex flex-col  text-zinc-600">
+    <main className="p-8 grow h-screen gap-4 flex flex-col  text-zinc-600">
       <div className="items-center absolute flex gap-x-4 ">
         <ThemeToggle />
         <input
@@ -409,6 +426,17 @@ export default function Home() {
       </div>
       <div className="grow w-full h-full flex justify-center mx-auto" ref={ref}>
         <svg height={dim} width={dim}>
+          <g>
+            {increments.map((increment) => (
+              <circle
+                key={increment}
+                r={increment}
+                cx={dim / 2}
+                cy={dim / 2}
+                className="fill-none stroke-zinc-200 dark:stroke-zinc-600"
+              />
+            ))}
+          </g>
           <g transform={`translate(${dim / 2}, ${dim / 2})`}>
             {data.map((d, i) => {
               const arcPath = (
@@ -428,18 +456,6 @@ export default function Home() {
               return arcPath;
             })}
           </g>
-          <circle
-            r={innerRadius}
-            cx={dim / 2}
-            cy={dim / 2}
-            className="fill-none stroke-zinc-200 dark:stroke-zinc-600"
-          />
-          <circle
-            r={outerRadius}
-            cx={dim / 2}
-            cy={dim / 2}
-            className="fill-none stroke-zinc-200 dark:stroke-zinc-600"
-          />
         </svg>
       </div>
     </main>
