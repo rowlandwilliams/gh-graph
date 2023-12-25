@@ -385,8 +385,8 @@ export default function Home() {
   const dates = data.map((d) => d.date);
 
   // Set up scales
-  const outerRadius = (0.6 * graphWidth) / 2;
-  const innerRadius = (0.3 * graphWidth) / 2;
+  const outerRadius = dim / 2;
+  const innerRadius = (0.2 * graphWidth) / 2;
 
   const countScale = scaleLinear({
     domain: [0, Math.max(...counts)],
@@ -399,38 +399,49 @@ export default function Home() {
     Math.max(...counts),
   ]);
   return (
-    <main
-      ref={ref}
-      className="flex px-8 grow flex-col items-center  text-zinc-600"
-    >
-      <div className="top-4 items-center flex gap-x-4 left-4 absolute">
+    <main className="p-4 grow h-screen gap-4 flex flex-col  text-zinc-600">
+      <div className="items-center absolute flex gap-x-4 ">
         <ThemeToggle />
         <input
           placeholder="@github_username"
           className="px-2 w-32 bg-zinc-800 border border-teal-500 rounded-sm h-8"
         />
       </div>
-      <svg height={dim} width={dim}>
-        <g transform={`translate(${dim / 2}, ${dim / 2})`}>
-          {data.map((d, i) => {
-            const arcPath = (
-              <Arc
-                key={`arc-${i}`}
-                data={d}
-                innerRadius={countScale(0)}
-                outerRadius={countScale(d.count)}
-                startAngle={datesScale(d.date)}
-                endAngle={datesScale(d.date) || 0 + datesScale.bandwidth()}
-                padAngle={0.1}
-                stroke={String(colorScale(d.count)) || undefined}
-                className="stroke-[1.5px]"
-              />
-            );
+      <div className="grow w-full h-full flex justify-center mx-auto" ref={ref}>
+        <svg height={dim} width={dim}>
+          <g transform={`translate(${dim / 2}, ${dim / 2})`}>
+            {data.map((d, i) => {
+              const arcPath = (
+                <Arc
+                  key={`arc-${i}`}
+                  data={d}
+                  innerRadius={countScale(0)}
+                  outerRadius={countScale(d.count)}
+                  startAngle={datesScale(d.date)}
+                  endAngle={datesScale(d.date) || 0 + datesScale.bandwidth()}
+                  padAngle={0.9}
+                  stroke={String(colorScale(d.count)) || undefined}
+                  className="stroke-[2.5px]"
+                />
+              );
 
-            return arcPath;
-          })}
-        </g>
-      </svg>
+              return arcPath;
+            })}
+          </g>
+          <circle
+            r={innerRadius}
+            cx={dim / 2}
+            cy={dim / 2}
+            className="fill-none stroke-zinc-200 dark:stroke-zinc-600"
+          />
+          <circle
+            r={outerRadius}
+            cx={dim / 2}
+            cy={dim / 2}
+            className="fill-none stroke-zinc-200 dark:stroke-zinc-600"
+          />
+        </svg>
+      </div>
     </main>
   );
 }
