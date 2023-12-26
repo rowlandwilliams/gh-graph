@@ -95,7 +95,7 @@ export default function Home() {
   });
 
   const datesScale = scaleBand({ domain: dates, range: [0, Math.PI * 2] });
-  const colorScale = scaleSequential(interpolateOrRd).domain([
+  const colorScale = scaleSequential(interpolateTurbo).domain([
     0,
     maxCountRoundedUp,
   ]);
@@ -124,8 +124,8 @@ export default function Home() {
     const angle = (month / 12) * Math.PI * 2 - Math.PI / 2; // Adjust the starting angle to 12 o'clock
     const x1 = dim / 2 + (innerRadius - innerExtension) * Math.cos(angle);
     const y1 = dim / 2 + (innerRadius - innerExtension) * Math.sin(angle);
-    const x2 = dim / 2 + outerRadius * Math.cos(angle);
-    const y2 = dim / 2 + outerRadius * Math.sin(angle);
+    const x2 = dim / 2 + (outerRadius+innerExtension) * Math.cos(angle);
+    const y2 = dim / 2 +(outerRadius+innerExtension) * Math.sin(angle);
 
     // Calculate the position for the text labels
     const labelX = dim / 2 + (innerRadius - 30) * Math.cos(angle);
