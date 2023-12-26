@@ -5,7 +5,6 @@ import { scaleBand, scaleLinear } from "@visx/scale";
 import { Arc } from "@visx/shape";
 import { scaleSequential } from "d3-scale";
 import { interpolateTurbo } from "d3-scale-chromatic";
-import { generateRandomData } from "./utils/utils";
 
 const monthStrings: string[] = [
   "January",
@@ -23,9 +22,12 @@ const monthStrings: string[] = [
 ];
 
 // Example usage:
+interface Props {
+  apiData: any;
+}
 
-export const RadialBarChart = () => {
-  const data = generateRandomData();
+export const RadialBarChart = ({ apiData }: Props) => {
+  const data = apiData.data.contributions;
 
   const { ref, graphHeight, graphWidth } = useResponsiveGraphDims();
   const dims = [graphHeight, graphWidth];
@@ -35,8 +37,8 @@ export const RadialBarChart = () => {
   const factor = 5;
 
   // Extract levels and counts from data
-  const counts = data.map((d) => d.count);
-  const dates = data.map((d) => d.date);
+  const counts = data.map((d: { count: number }) => d.count);
+  const dates = data.map((d: { date: string }) => d.date);
   const maxCount = Math.max(...counts);
   const maxCountRoundedUp = Math.ceil(maxCount / factor) * factor;
 
@@ -117,7 +119,10 @@ export const RadialBarChart = () => {
   });
 
   return (
-    <div className="grow w-full h-full min-w-[800px] flex justify-center mx-auto" ref={ref}>
+    <div
+      className="grow w-full h-full min-w-[800px] flex justify-center mx-auto"
+      ref={ref}
+    >
       <svg height={dim} width={dim}>
         <g>
           {increments.map((increment) => (
@@ -131,7 +136,7 @@ export const RadialBarChart = () => {
           ))}
         </g>
         <g transform={`translate(${dim / 2}, ${dim / 2})`}>
-          {data.map((d, i) => {
+          {data.map((d: any, i: number) => {
             const arcPath = (
               <Arc
                 key={`arc-${i}`}
