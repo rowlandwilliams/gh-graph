@@ -117,7 +117,7 @@ export const RadialBarChart = () => {
   });
 
   return (
-    <div className="grow w-full h-full flex justify-center mx-auto" ref={ref}>
+    <div className="grow w-full h-full min-w-[800px] flex justify-center mx-auto" ref={ref}>
       <svg height={dim} width={dim}>
         <g>
           {increments.map((increment) => (
