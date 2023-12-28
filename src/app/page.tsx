@@ -1,15 +1,17 @@
 import { RadialBarChart } from "@/components/RadialBarChart/RadialBarChart";
 import { ThemeToggle } from "@/components/ThemeToggle/ThemeToggle";
+import { headers } from "next/headers";
 
 const getData = async () => {
-  const res = await fetch(`http://localhost:3000/api/contributions`);
+  const headersList = headers();
+  const referer = headersList.get("referer");
+  const res = await fetch(`${referer}/api/contributions`);
   return res.json();
 };
 
 export default async function Home() {
   const data = await getData();
 
-  console.log(data);
   return (
     <main className="p-8 grow h-screen gap-4 flex flex-col  text-zinc-600">
       <div className="items-center absolute flex gap-x-4 ">
