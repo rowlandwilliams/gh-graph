@@ -22,10 +22,15 @@ export default function RootLayout({
       <body
         className={classNames(
           inter.className,
-          "bg-gray-50 dark:bg-zinc-900 min-h-screen flex flex-col text-body text-xs"
+          "bg-gray-50 dark:bg-black relative min-h-screen flex flex-col text-body text-xs"
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="items-center top-4 left-4 absolute flex gap-x-4 ">
+            <ThemeToggle />
+          </div>
+          {children}
+        </Providers>
       </body>
     </html>
   );

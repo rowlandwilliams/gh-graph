@@ -27,7 +27,7 @@ interface Props {
 }
 
 export const RadialBarChart = ({ apiData }: Props) => {
-  const data = apiData.data.contributions;
+  const data = apiData.contributions;
 
   const { ref, graphHeight, graphWidth } = useResponsiveGraphDims();
   const dims = [graphHeight, graphWidth];
