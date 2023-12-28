@@ -4,8 +4,9 @@ import { headers } from "next/headers";
 
 const getData = async () => {
   const headersList = headers();
-  const referer = headersList.get("referer");
-  const res = await fetch(`${referer}/api/contributions`);
+  const incomingUrl = headersList.get("x-url");
+
+  const res = await fetch(`${incomingUrl}/api/contributions`);
   return res.json();
 };
 
